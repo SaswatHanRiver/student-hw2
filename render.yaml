@@ -1,0 +1,31 @@
+# Render Blueprint: free PostgreSQL + the Spring Boot API (Docker, from the backend folder).
+# Render dashboard -> New -> Blueprint -> pick this repo.
+databases:
+  - name: student-db
+    plan: free
+    databaseName: students
+    user: students
+
+services:
+  - type: web
+    name: student-api
+    runtime: docker
+    rootDir: backend
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: DB_HOST
+        fromDatabase: { name: student-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: student-db, property: port }
+      - key: DB_NAME
+        fromDatabase: { name: student-db, property: database }
+      - key: DB_USERNAME
+        fromDatabase: { name: student-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: student-db, property: password }
+      - key: JAVA_TOOL_OPTIONS
+        value: "-XX:MaxRAMPercentage=75"
+      # Set to your Vercel URL after the frontend is deployed, e.g. https://student-hw2.vercel.app
+      - key: APP_CORS_ALLOWED_ORIGINS
+        sync: false

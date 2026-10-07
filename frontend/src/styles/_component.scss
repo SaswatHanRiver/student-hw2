@@ -1,0 +1,386 @@
+// =============================================================
+// _component.scss — shared, reusable components
+// (page heading, state block, skeleton, status tag, pagination)
+// =============================================================
+@use "variables" as *;
+@use "mixins" as *;
+
+/* ---------- Page container ---------- */
+.page-container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  @include below($bp-768) {
+    padding: $space-5 $space-4;
+    gap: $space-4;
+  }
+}
+
+/* Narrower container for form and details pages */
+.page-container-narrow {
+  max-width: $form-max-width;
+}
+
+/* ---------- Page heading: text on the left, actions on the right ---------- */
+.page-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-4;
+}
+
+.page-heading-text {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-width: 0;
+}
+
+.page-heading-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.page-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+/* "24 enrolled" next to the title */
+.count-badge {
+  padding: $space-1 $space-3;
+  border-radius: $radius-pill;
+  background: $blue-b2;
+  color: $blue-b1;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+/* "Back to students" link */
+.back-link {
+  align-self: flex-start;
+  color: $blue-b1;
+  font-size: $font-size-sm;
+  text-decoration: none;
+  @include focus-ring;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.page-heading-title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $navy-b1;
+
+  @include below($bp-640) {
+    font-size: $font-size-lg;
+  }
+}
+
+.page-heading-description {
+  font-size: $font-size-sm;
+  color: $grey-b2;
+}
+
+/* ---------- Card surface ---------- */
+.surface-card {
+  background: $white-b1;
+  border: $border-width solid $grey-b3;
+  border-radius: $radius-md;
+  min-width: 0;
+}
+
+/* Card with inner spacing (forms, details) */
+.surface-card-padded {
+  padding: $space-6;
+
+  @include below($bp-640) {
+    padding: $space-4;
+  }
+}
+
+/* ---------- State block (empty / no results / error) ---------- */
+.state-block {
+  max-width: $state-block-max-width;
+  margin: 0 auto;
+  padding: $space-8 $space-4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  text-align: center;
+}
+
+.state-block-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $navy-b1;
+}
+
+.state-block-message {
+  font-size: $font-size-sm;
+  color: $grey-b1;
+  overflow-wrap: anywhere;
+}
+
+/* Error variant: red title */
+.state-block-error .state-block-title {
+  color: $red-b1;
+}
+
+/* ---------- Skeleton (loading) ---------- */
+.skeleton-line {
+  display: block;
+  height: $skeleton-line-height;
+  width: $skeleton-line-long;
+  border-radius: $radius-sm;
+  background: $grey-b3;
+  animation: skeleton-pulse $skeleton-pulse-duration ease-in-out infinite alternate;
+}
+
+.skeleton-line-short {
+  width: $skeleton-line-short;
+}
+
+@keyframes skeleton-pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: $opacity-pulse-low;
+  }
+}
+
+/* ---------- Status tag ---------- */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-1 $space-3;
+  border-radius: $radius-pill;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.status-tag-active {
+  background: $green-b2;
+  color: $green-b1;
+}
+
+.status-tag-on-leave {
+  background: $amber-b2;
+  color: $amber-b1;
+}
+
+.status-tag-graduated {
+  background: $violet-b2;
+  color: $violet-b1;
+}
+
+/* ---------- Pagination ---------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-top: $border-width solid $grey-b3;
+
+  @include below($bp-640) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.pagination-summary {
+  font-size: $font-size-sm;
+  color: $grey-b2;
+
+  @include below($bp-640) {
+    text-align: center;
+  }
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+
+  @include below($bp-640) {
+    justify-content: center;
+  }
+}
+
+.pagination-button {
+  min-width: $control-height;
+  min-height: $control-height;
+  padding: 0 $space-3;
+  border: $border-width solid transparent;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $grey-b1;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  @include focus-ring;
+
+  &:hover:not(:disabled) {
+    background: $grey-b4;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: $opacity-disabled;
+  }
+
+  @include below($bp-640) {
+    min-width: $tap-target-min;
+    min-height: $tap-target-min;
+  }
+}
+
+/* Current page */
+.pagination-button-current {
+  background: $blue-b2;
+  border-color: $blue-b1;
+  color: $blue-b1;
+  font-weight: $font-weight-bold;
+}
+
+/* ---------- Toast (bottom of the screen) ---------- */
+.toast-region {
+  position: fixed;
+  right: $space-5;
+  bottom: $space-5;
+  left: $space-5;
+  z-index: $z-index-toast;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+
+  @include below($bp-640) {
+    right: $space-4;
+    bottom: $space-4;
+    left: $space-4;
+    justify-content: center;
+  }
+}
+
+.toast {
+  max-width: $toast-max-width;
+  padding: $space-3 $space-4;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  pointer-events: auto;
+}
+
+.toast-success {
+  background: $green-b2;
+  border: $border-width solid $green-b1;
+  color: $green-b1;
+}
+
+.toast-error {
+  background: $red-b2;
+  border: $border-width solid $red-b1;
+  color: $red-b1;
+}
+
+/* ---------- Confirm dialog (native <dialog>) ---------- */
+.confirm-dialog {
+  width: calc(100% - #{$space-6});
+  max-width: $dialog-max-width;
+  padding: $space-5;
+  border: $border-width solid $grey-b3;
+  border-radius: $radius-md;
+  background: $white-b1;
+  color: $grey-b1;
+
+  &::backdrop {
+    background: $dialog-backdrop;
+  }
+}
+
+.confirm-dialog-title {
+  font-size: $font-size-lg;
+  color: $navy-b1;
+  overflow-wrap: anywhere;
+}
+
+.confirm-dialog-message {
+  margin: $space-2 0 $space-5;
+  font-size: $font-size-sm;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+/* ---------- Details list (label : value) ---------- */
+.detail-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: $detail-label-width minmax(0, 1fr);
+  gap: $space-4;
+  padding: $space-3 0;
+  border-bottom: $border-width solid $grey-b3;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  dt {
+    color: $grey-b2;
+    font-size: $font-size-sm;
+  }
+
+  dd {
+    margin: 0;
+    color: $navy-b1;
+    font-size: $font-size-sm;
+  }
+
+  /* Phone: label above value */
+  @include below($bp-480) {
+    grid-template-columns: 1fr;
+    gap: $space-1;
+  }
+}
+
+.detail-value-wrap {
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Form skeleton ---------- */
+.form-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.form-skeleton-row {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}

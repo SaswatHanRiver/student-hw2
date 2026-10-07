@@ -1,0 +1,81 @@
+// =============================================================
+// _form-element.scss — search input and select
+// =============================================================
+@use "variables" as *;
+@use "mixins" as *;
+
+/* Wrapper for label + control */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-width: 0;
+}
+
+/* Small label above each control */
+.form-label {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $grey-b2;
+}
+
+/* Shared input + select look */
+.form-input,
+.form-select {
+  width: 100%;
+  min-height: $control-height;
+  padding: 0 $space-3;
+  border: $border-width solid $grey-b3;
+  border-radius: $radius-md;
+  background: $white-b1;
+  color: $navy-b1;
+  font-size: $font-size-sm;
+  @include focus-ring;
+
+  &::placeholder {
+    color: $grey-b2;
+  }
+
+  @include below($bp-640) {
+    min-height: $tap-target-min;
+    font-size: $font-size-md; // 16px stops iOS zooming into the field
+  }
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+/* Red asterisk after required labels */
+.form-required {
+  color: $red-b1;
+}
+
+/* Invalid input: red border */
+.form-input-invalid {
+  border-color: $red-b1;
+}
+
+/* Message under an invalid field */
+.form-error {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $red-b1;
+}
+
+/* Helper text under a field */
+.form-hint {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $grey-b2;
+}
+
+/* API error banner above a form */
+.form-alert {
+  padding: $space-3 $space-4;
+  border: $border-width solid $red-b1;
+  border-radius: $radius-md;
+  background: $red-b2;
+  color: $red-b1;
+  font-size: $font-size-sm;
+}

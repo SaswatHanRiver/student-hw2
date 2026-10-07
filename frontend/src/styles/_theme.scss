@@ -1,0 +1,48 @@
+// =============================================================
+// _theme.scss — real colour values for light and dark mode.
+// WM Light/Dark rule: one light value and one dark value per name.
+// =============================================================
+
+/* Light mode (default) */
+:root {
+  --navy-b1: #1c2b3a;
+  --grey-b1: #4a5565;
+  --grey-b2: #6b7584;
+  --grey-b3: #dde2e8;
+  --grey-b4: #f4f6f8;
+  --white-b1: #ffffff;
+  --blue-b1: #2357a6;
+  --blue-b2: #e7eef9;
+  --green-b1: #1f7a4d;
+  --green-b2: #e5f4ec;
+  --amber-b1: #8a5700;
+  --amber-b2: #fbf0dc;
+  --violet-b1: #5b4ba8;
+  --violet-b2: #ece9f8;
+  --red-b1: #b12028;
+  --red-b2: #fbe7e8;
+  color-scheme: light;
+}
+
+/* Dark mode — same names, dark values */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --navy-b1: #e6edf5;
+    --grey-b1: #b4bfcc;
+    --grey-b2: #8f9aa8;
+    --grey-b3: #2e3946;
+    --grey-b4: #111a23;
+    --white-b1: #18212b;
+    --blue-b1: #8ab0ec;
+    --blue-b2: #1f2f47;
+    --green-b1: #6fcf9c;
+    --green-b2: #183326;
+    --amber-b1: #e7b45a;
+    --amber-b2: #3a2d14;
+    --violet-b1: #b3a8ee;
+    --violet-b2: #2a2546;
+    --red-b1: #f08a8f;
+    --red-b2: #3b1a1c;
+    color-scheme: dark;
+  }
+}

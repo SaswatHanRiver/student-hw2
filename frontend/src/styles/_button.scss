@@ -1,0 +1,92 @@
+// =============================================================
+// _button.scss — buttons get their width from padding, never a fixed px width
+// =============================================================
+@use "variables" as *;
+@use "mixins" as *;
+
+/* Base button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  min-height: $control-height;
+  padding: 0 $space-4;
+  border: $border-width solid transparent;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color $transition-fast, border-color $transition-fast;
+  @include focus-ring;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: $opacity-disabled;
+  }
+
+  @include below($bp-640) {
+    min-height: $tap-target-min;
+  }
+}
+
+/* Outlined secondary button (Clear filters, Try again) */
+.btn-secondary {
+  background: $white-b1;
+  border-color: $grey-b3;
+  color: $navy-b1;
+
+  &:hover:not(:disabled) {
+    background: $grey-b4;
+  }
+}
+
+/* Text-only button (Reset) */
+.btn-text {
+  background: transparent;
+  color: $blue-b1;
+
+  &:hover:not(:disabled) {
+    background: $blue-b2;
+  }
+}
+
+/* Filled primary button (Add student, Save) */
+.btn-primary {
+  background: $blue-b1;
+  border-color: $blue-b1;
+  color: $white-b1;
+  text-decoration: none;
+
+  &:hover:not(:disabled) {
+    filter: brightness($hover-brightness);
+  }
+}
+
+/* Links styled as buttons keep the button look */
+a.btn {
+  text-decoration: none;
+}
+
+/* Destructive action inside the confirm dialog */
+.btn-danger {
+  background: $red-b1;
+  border-color: $red-b1;
+  color: $white-b1;
+
+  &:hover:not(:disabled) {
+    filter: brightness($hover-brightness);
+  }
+}
+
+/* Destructive action on a page (outlined, so it doesn't compete with Edit) */
+.btn-danger-outline {
+  background: $white-b1;
+  border-color: $red-b1;
+  color: $red-b1;
+
+  &:hover:not(:disabled) {
+    background: $red-b2;
+  }
+}

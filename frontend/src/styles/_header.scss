@@ -1,0 +1,44 @@
+// =============================================================
+// _header.scss — top app bar
+// =============================================================
+@use "variables" as *;
+@use "mixins" as *;
+
+/* App header bar */
+.app-header {
+  background: $white-b1;
+  border-bottom: $border-width solid $grey-b3;
+}
+
+/* Inner row, same width as the page container */
+.app-header-inner {
+  max-width: $container-max-width;
+  min-height: $header-height;
+  margin: 0 auto;
+  padding: 0 $space-6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+
+  @include below($bp-768) {
+    padding: 0 $space-4;
+  }
+}
+
+/* Product name */
+.app-header-brand {
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $navy-b1;
+}
+
+/* Signed-in admin name (hidden on small phones) */
+.app-header-user {
+  font-size: $font-size-sm;
+  color: $grey-b2;
+
+  @include below($bp-480) {
+    display: none;
+  }
+}

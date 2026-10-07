@@ -1,0 +1,103 @@
+// =============================================================
+// _variables.scss — every colour, size and breakpoint lives here.
+// Components never type a colour or a size directly.
+// =============================================================
+
+// -------------------------------------------------------------
+// Colours — WM naming: colour name + code (e.g. $red-b1).
+// Each SCSS variable points to a CSS custom property, and every
+// light colour has exactly one dark colour with the SAME name
+// (values are defined in _theme.scss).
+// -------------------------------------------------------------
+$navy-b1: var(--navy-b1);     // headings, strong text
+$grey-b1: var(--grey-b1);     // body text
+$grey-b2: var(--grey-b2);     // muted text, placeholders
+$grey-b3: var(--grey-b3);     // borders, dividers
+$grey-b4: var(--grey-b4);     // page background, table header
+$white-b1: var(--white-b1);   // cards, inputs, table body
+$blue-b1: var(--blue-b1);     // primary actions, links, focus
+$blue-b2: var(--blue-b2);     // primary hover / selected page bg
+$green-b1: var(--green-b1);   // "Active" text, good attendance
+$green-b2: var(--green-b2);   // "Active" tag background
+$amber-b1: var(--amber-b1);   // "On leave" text, mid attendance
+$amber-b2: var(--amber-b2);   // "On leave" tag background
+$violet-b1: var(--violet-b1); // "Graduated" text
+$violet-b2: var(--violet-b2); // "Graduated" tag background
+$red-b1: var(--red-b1);       // errors, low attendance
+$red-b2: var(--red-b2);       // error block background
+
+// -------------------------------------------------------------
+// Typography — one font family for the whole app (WM checklist #4)
+// -------------------------------------------------------------
+$font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-size-xs: 0.75rem;   // 12px — captions
+$font-size-sm: 0.875rem;  // 14px — table text, labels
+$font-size-md: 1rem;      // 16px — body, inputs
+$font-size-lg: 1.25rem;   // 20px — section title
+$font-size-xl: 1.75rem;   // 28px — page title (h1)
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$line-height-tight: 1.25;
+$line-height-body: 1.5;
+
+// -------------------------------------------------------------
+// Spacing scale (4px base)
+// -------------------------------------------------------------
+$space-1: 0.25rem; // 4
+$space-2: 0.5rem;  // 8
+$space-3: 0.75rem; // 12
+$space-4: 1rem;    // 16
+$space-5: 1.5rem;  // 24
+$space-6: 2rem;    // 32
+$space-7: 2.5rem;  // 40
+$space-8: 3rem;    // 48
+
+// -------------------------------------------------------------
+// Sizes
+// -------------------------------------------------------------
+$container-max-width: 80rem;   // 1280 — same page width on every page
+$control-height: 2.5rem;       // 40 — inputs, selects, buttons
+$tap-target-min: 2.75rem;      // 44 — min touch size on phones
+$search-min-width: 16rem;      // search box never smaller than this on desktop
+$filter-min-width: 10rem;      // grade / status selects
+$attendance-bar-width: 4.5rem; // the small bar next to attendance %
+$attendance-bar-height: 0.375rem;
+$skeleton-line-height: 0.875rem;
+$skeleton-line-short: 40%;
+$skeleton-line-long: 75%;
+$state-block-max-width: 28rem;
+$header-height: 3.5rem;
+$form-max-width: 56rem;        // create / edit / details pages are narrower than the list
+$dialog-max-width: 28rem;
+$toast-max-width: 24rem;
+$detail-label-width: 10rem;    // label column on the details page
+$focus-shadow-size: 3px;
+
+$border-width: 1px;
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-pill: 999px;
+
+$transition-fast: 150ms ease;
+$skeleton-pulse-duration: 1.2s;
+$opacity-disabled: 0.5;
+$opacity-pulse-low: 0.45;
+$opacity-refreshing: 0.6;
+$hover-brightness: 0.92;   // filled buttons darken slightly on hover
+$z-index-toast: 100;
+$dialog-backdrop: rgb(15 23 32 / 45%);
+
+// -------------------------------------------------------------
+// Breakpoints — WM order: 1920 → 1600 → 1366 → 1280 → 1024 → 991 → 768 → 640 → 480 → 375
+// -------------------------------------------------------------
+$bp-1920: 1920px;
+$bp-1600: 1600px;
+$bp-1366: 1366px;
+$bp-1280: 1280px;
+$bp-1024: 1024px;
+$bp-991: 991px;
+$bp-768: 768px;
+$bp-640: 640px;
+$bp-480: 480px;
+$bp-375: 375px;

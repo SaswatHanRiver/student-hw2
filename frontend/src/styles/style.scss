@@ -1,0 +1,11 @@
+// =============================================================
+// style.scss — imports every SCSS file (WM folder structure)
+// =============================================================
+@use "theme";
+@use "reset";
+@use "header";
+@use "button";
+@use "form-element";
+@use "component";
+@use "student-list";
+@use "student-form";
