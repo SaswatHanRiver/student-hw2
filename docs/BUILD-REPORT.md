@@ -1,11 +1,11 @@
 # QA build report — Students feature (HW2)
 
-Format: WM | Report (10 parts from training Step 8). Items in [brackets] are filled in after deploy.
+Format: WM | Report (10 parts from training Step 8).
 
 **1. Build**
-- Branch: `main` · Commit: [short hash after push] · Date: [date]
-- Frontend: [Vercel URL]/students/list · API: [Render URL] (Swagger: [Render URL]/swagger-ui.html)
-- Free hosting sleeps when idle: the **first request can take about a minute**. Open the API health link first: [Render URL]/actuator/health
+- Branch: `main` · Commit under test: `97114a8` · Deployed: October 9, 2026
+- Demo: https://students-hw.dvconsulting.org/students/list (EC2, Docker, nginx, Cloudflare). The site calls the API at `/api/` on the same address.
+- API direct: https://students-hw-api.dvconsulting.org (Swagger: `/swagger-ui.html`, health: `/actuator/health`)
 
 **2. TL tasks covered**
 - TL | AI Frontend Training — Homework 2 (main task: https://app.notion.com/p/3e9326b2d5fb81298fb5e4afc8157861)
@@ -17,8 +17,9 @@ Format: WM | Report (10 parts from training Step 8). Items in [brackets] are fil
 - Forms check every field before saving and show the server's message when a value is rejected (e.g. an email already used).
 
 **4. Fixed issues**
-- No QA tickets yet (first build). Two issues I found myself during testing:
+- No QA tickets yet (first build). Issues I found myself:
   - A student that does not exist was retried before showing "not found". Fixed: a 404 is no longer retried, so "Student not found" shows at once.
+  - On deploy, phones could not resolve the separate API hostname (a new DNS record still cached as "not found"). Fixed: the site calls `/api/` on its own address and nginx forwards it to the API, so the browser needs only one hostname and no CORS.
   - Name / date cells wrapping in the middle of words at 768 px (fixed in HW1, re-checked here).
 
 **5. Test accounts / roles**
@@ -48,13 +49,14 @@ Full list: `docs/TEST-CASES.md` (37 cases).
 - Search treats `%` and `_` as normal characters only partly (SQL `LIKE` wildcards are not escaped).
 - No login or roles (out of scope for the homework).
 - The WM Error Message List page is still a draft, so the messages are my own wording, identical in API and UI.
-- Demo server uses H2 in memory: data resets to the 24 seed students whenever the free server restarts or wakes up.
+- Demo uses H2 in memory: data resets to the 24 starting students whenever the API container restarts.
+- No favicon (the browser shows a harmless `favicon.ico` 404).
 
-**9. Results** (real output pasted on the Notion page)
-- Backend `./mvnw test`: [result]
+**9. Results** (real output pasted on the Notion page, section 5)
+- Backend `./mvnw -B test` (Java 21 container on the server): Tests run: 11, Failures: 0, Errors: 0 · BUILD SUCCESS
 - `npx tsc --noEmit`: clean · `npm run lint`: clean · `npm run build`: success
-- Playwright: `test:e2e` 17 passed · `test:e2e:mutation` 3 passed · `qa:responsive` 30 passed
+- Playwright against the deployed demo (commit `97114a8`): `npm run test:e2e` 61 passed (17 read-only + 44 responsive) · `npm run test:e2e:mutation` 3 passed
 
 **10. Screen sizes and browsers checked**
-- Widths: 1920, 1600, 1366, 1280, 1024, 991, 768, 640, 480, 375 (list, create, details): no sideways scroll, tap targets at least 24 px.
-- Browser: Chromium (Playwright). Manual check in Chrome. Not checked: Safari, Firefox.
+- Widths: 1920, 1600, 1440, 1366, 1280, 1024, 991, 768, 640, 480, 375 (list, create, edit, details): no sideways scroll, tap targets at least 24 px.
+- Browser: Chromium (Playwright). Manual check: Chrome on Windows and phones. Not checked: Safari, Firefox.
