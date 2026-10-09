@@ -1,7 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 
 // WM breakpoints, biggest to smallest
-const WIDTHS = [1920, 1600, 1366, 1280, 1024, 991, 768, 640, 480, 375];
+const WIDTHS = [1920, 1600, 1440, 1366, 1280, 1024, 991, 768, 640, 480, 375]; // WM widths + 1440 for the design review
 const HEIGHT = 900;
 const MIN_TARGET_PX = 24; // WCAG 2.2 minimum target size
 
@@ -9,6 +9,7 @@ const MIN_TARGET_PX = 24; // WCAG 2.2 minimum target size
 const PAGES = [
   { name: "list", open: async (page: Page) => { await page.goto("/students/list"); await expect(page.getByTestId("state-filled")).toBeVisible(); } },
   { name: "create", open: async (page: Page) => { await page.goto("/students/create"); await page.getByRole("button", { name: "Add student" }).click(); await expect(page.getByText("Name is required.")).toBeVisible(); } },
+  { name: "edit", open: async (page: Page) => { await page.goto("/students/list"); await page.locator(".student-name-primary").first().click(); await page.getByRole("link", { name: "Edit" }).click(); await expect(page.getByRole("button", { name: "Save changes" })).toBeVisible(); } },
   { name: "details", open: async (page: Page) => { await page.goto("/students/list"); await page.locator(".student-name-primary").first().click(); await expect(page.getByTestId("student-details")).toBeVisible(); } },
 ];
 

@@ -2,6 +2,8 @@ import axios, { isAxiosError } from "axios";
 import type { ApiError, ApiFieldError } from "@/types/student";
 
 // Base URL of the Spring Boot API. NEXT_PUBLIC_* values are baked in at build time.
+// Empty string = same origin: the browser calls /api/... on the site itself and nginx forwards it
+// to the backend (the Docker/EC2 setup). Not set at all = local development on :8080.
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
 
 // Requests that take longer than this are treated as a network error

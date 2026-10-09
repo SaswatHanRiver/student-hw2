@@ -48,7 +48,7 @@ Full list: `docs/TEST-CASES.md` (37 cases).
 - Search treats `%` and `_` as normal characters only partly (SQL `LIKE` wildcards are not escaped).
 - No login or roles (out of scope for the homework).
 - The WM Error Message List page is still a draft, so the messages are my own wording, identical in API and UI.
-- Render free PostgreSQL expires 30 days after creation.
+- Demo server uses H2 in memory: data resets to the 24 seed students whenever the free server restarts or wakes up.
 
 **9. Results** (real output pasted on the Notion page)
 - Backend `./mvnw test`: [result]

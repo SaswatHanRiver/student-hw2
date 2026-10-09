@@ -86,7 +86,7 @@ $opacity-pulse-low: 0.45;
 $opacity-refreshing: 0.6;
 $hover-brightness: 0.92;   // filled buttons darken slightly on hover
 $z-index-toast: 100;
-$dialog-backdrop: rgb(15 23 32 / 45%);
+$dialog-backdrop: var(--dialog-backdrop); // light/dark values in _theme.scss
 
 // -------------------------------------------------------------
 // Breakpoints — WM order: 1920 → 1600 → 1366 → 1280 → 1024 → 991 → 768 → 640 → 480 → 375

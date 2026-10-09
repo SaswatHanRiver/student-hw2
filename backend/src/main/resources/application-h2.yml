@@ -1,0 +1,11 @@
+# Profile "h2": in-memory H2 database, no PostgreSQL needed.
+# Used for the deployed demo (Render) and for a quick local run:
+#   ./mvnw spring-boot:run -Dspring-boot.run.profiles=h2
+# PostgreSQL mode lets the same Flyway scripts run on H2.
+# Data lives in memory: it resets to the 24 seed students every time the app restarts.
+spring:
+  datasource:
+    url: jdbc:h2:mem:students;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver

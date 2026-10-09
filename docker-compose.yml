@@ -1,0 +1,33 @@
+# Run both apps on one server:  cp .env.example .env  (set your two URLs), then  docker compose up -d --build
+# Ports are bound to 127.0.0.1 only: the outside world reaches them through nginx
+# (deploy/nginx/student-hw2.conf): FRONTEND host -> web:3000, API host -> api:8080.
+services:
+  api:
+    build: ./backend
+    container_name: students-hw-api
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: h2,lowmem   # in-memory H2 + small thread pools
+      APP_CORS_ALLOWED_ORIGINS: ${FRONTEND_URL:?set FRONTEND_URL in .env},http://localhost:3000
+      # Same values as the Dockerfile default; tune here without rebuilding
+      JAVA_OPTS: "-XX:+UseSerialGC -Xms32m -Xmx128m -Xss256k -XX:MaxMetaspaceSize=128m -XX:ReservedCodeCacheSize=48m -XX:TieredStopAtLevel=1 -XX:MaxDirectMemorySize=16m"
+    ports:
+      - "127.0.0.1:8101:8080"
+    mem_limit: 384m
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 90s
+      retries: 3
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${API_URL:?set API_URL in .env}   # baked in at build: rebuild web after changing it
+    container_name: students-hw-web
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3101:3000"
+    mem_limit: 160m

@@ -8,3 +8,6 @@ test-results/
 *.tsbuildinfo
 .DS_Store
 .idea/
+
+# Claude Code local settings (per machine)
+.claude/settings.local.json

@@ -4,8 +4,9 @@ import { defineConfig, devices } from "@playwright/test";
 const externalBaseURL = process.env.PLAYWRIGHT_BASE_URL;
 const baseURL = externalBaseURL ?? "http://localhost:3000";
 
-// Mutation tests (create/edit/delete real data) run only when asked: E2E_MUTATION=1
-const runMutation = process.env.E2E_MUTATION === "1";
+// Mutation tests (create/edit/delete real data) run only when asked:
+// E2E_MUTATION=1, or by naming the file (npm run test:e2e:mutation) - works on Windows too
+const runMutation = process.env.E2E_MUTATION === "1" || process.argv.some((arg) => arg.includes("mutation"));
 
 // Optional: use an already-installed Chrome (set CHROME_PATH). Normally leave this unset.
 const executablePath = process.env.CHROME_PATH;

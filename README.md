@@ -7,7 +7,7 @@ A complete Students feature — **list, create, details, edit, delete** — on a
 |---|---|---|
 | Frontend | Next.js 15 · React 19 · TypeScript · TanStack Query 5 · axios · SCSS · Playwright | [`frontend/`](frontend) |
 | Backend API | Spring Boot 3.5 · Java 21 · Spring Data JPA · Bean Validation · Flyway · springdoc | [`backend/`](backend) |
-| Database | PostgreSQL 16 | `backend/docker-compose.yml` |
+| Database | PostgreSQL 16 locally · H2 (in memory) on the demo server | `backend/docker-compose.yml` · `application-h2.yml` |
 
 ## Run it locally (about 5 minutes)
 
@@ -20,6 +20,8 @@ docker compose up -d
 
 # 2. API on http://localhost:8080  (Flyway creates the table and 24 starting students)
 ./mvnw spring-boot:run            # Windows: mvnw.cmd spring-boot:run
+#    No Docker? Use the in-memory H2 database instead (skip step 1):
+#    ./mvnw spring-boot:run -Dspring-boot.run.profiles=h2
 #    API docs: http://localhost:8080/swagger-ui.html
 #    Tests:    ./mvnw test
 
@@ -55,8 +57,14 @@ cd frontend && npm run qa:responsive       # 3 pages x 10 WM widths, writes fron
 
 Every error has one shape: `{ "code": "...", "message": "...", "fieldErrors": [{ "field": "...", "message": "..." }] }`.
 
-## Deploy (demo link)
-- **API + database on Render:** Dashboard, then New, then Blueprint, and pick this repo (`render.yaml`). After the frontend is live, set `APP_CORS_ALLOWED_ORIGINS` to the Vercel URL. The free plan sleeps when idle, so the first request can take about a minute.
+## Run with Docker (one server, both apps)
+```bash
+docker compose up -d --build      # api on 127.0.0.1:8101 (H2), web on 127.0.0.1:3101
+```
+Put nginx in front with `deploy/nginx/student-hw2.conf`. Step-by-step EC2 guide with memory settings: [`deploy/EC2-DEPLOY.md`](deploy/EC2-DEPLOY.md).
+
+## Deploy (demo link), other options
+- **API on Render (H2 in memory):** Dashboard, then New, then Blueprint, and pick this repo (`render.yaml`). CORS already allows `https://student-hw2*.vercel.app`. The free plan sleeps when idle, so the first request can take about a minute, and the data resets to the 24 seed students on restart.
 - **Frontend on Vercel:** import this repo with **Root Directory = `frontend`**, set `NEXT_PUBLIC_API_BASE_URL` to the Render URL, then deploy.
 
 ## Docs

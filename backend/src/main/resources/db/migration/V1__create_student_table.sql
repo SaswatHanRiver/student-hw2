@@ -8,8 +8,8 @@ CREATE TABLE student (
     joined_on          DATE         NOT NULL,
     attendance_percent INTEGER      NOT NULL CHECK (attendance_percent BETWEEN 0 AND 100),
     status             VARCHAR(20)  NOT NULL CHECK (status IN ('ACTIVE', 'ON_LEAVE', 'GRADUATED')),
-    created_at         TIMESTAMPTZ  NOT NULL DEFAULT now(),
-    updated_at         TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    created_at         TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated_at         TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     CONSTRAINT uk_student_code  UNIQUE (student_code),
     CONSTRAINT uk_student_email UNIQUE (email)
 );

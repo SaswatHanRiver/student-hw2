@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "check": "tsc --noEmit && eslint .",
     "test:e2e": "playwright test",
-    "test:e2e:mutation": "E2E_MUTATION=1 playwright test e2e/students.mutation.spec.ts",
+    "test:e2e:mutation": "playwright test e2e/students.mutation.spec.ts",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",

@@ -60,7 +60,7 @@ Components never import axios. To change the API, only the service changes.
 `GlobalExceptionHandler` (Spring) builds the left column; `getApiErrorMessage` / `getApiFieldErrors` (`utils/api-client.ts`) read it.
 
 ## 8. Backend points
-- Flyway owns the schema; Hibernate only validates it (`ddl-auto: validate`).
+- Flyway owns the schema; Hibernate never changes it (`ddl-auto: none`). The same scripts run on PostgreSQL (local) and on H2 in PostgreSQL mode (demo server, profile `h2`).
 - `Specification.allOf(...)`: each filter returns `null` when unused, so only the filters actually used go into the WHERE clause.
 - Page and size are clamped in the service (page at least 1, size 1 to 100), and the API's page is 1-based like the UI.
 - Code and email are normalised (uppercase / lowercase + trim) before the uniqueness check, so `Ana@X.com` and `ana@x.com` count as the same email.
